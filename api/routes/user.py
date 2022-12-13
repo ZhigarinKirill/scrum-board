@@ -214,3 +214,22 @@ def share_task_to_user(task_id: int):
     db.session.commit()
 
     return extend_dict(task.serialize, 'to_user', destination_user_id), 201
+
+
+@user_pages.route('/tasks/<int:task_id>/<int:status>', methods=['PATCH'])
+@cross_origin()
+@jwt_required()
+def change_status(task_id: int, status: int):
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).first()
+    if user is None:
+        return abort(404, description='User not found')
+
+    if status not in (0, 1, 2):
+        return abort(404, description='Invalid task status')
+
+    task = Task.query.filter_by(id=task_id).first()
+    task.status = status
+    db.session.commit()
+
+    return json.dumps({'task': task.serialize, 'msg': 'Status was successfully changed'}), 200
