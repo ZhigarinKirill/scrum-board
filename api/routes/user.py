@@ -17,14 +17,13 @@ def extend_dict(source_dict: Dict[Any, Any], key: Any, value: Any) -> Dict[Any, 
     return copied_dict
 
 
-@cross_origin()
 @user_pages.route('/register', methods=['POST'])
+@cross_origin()
 def register():
     try:
         username = request.json.get('username', None)
         email = request.json.get('email', None)
         password = request.json.get('password', None)
-
         if username is None:
             return abort(401, description='Username missing')
         if email is None:
@@ -46,8 +45,8 @@ def register():
         return abort(400, description='Username or email already used')
 
 
-@cross_origin()
 @user_pages.route('/login', methods=['POST'])
+@cross_origin()
 def login():
     username = request.json.get('username', None)
     password = request.json.get('password', None)
@@ -149,9 +148,11 @@ def get_user_tasks():
     task_ids = [user_task.task_id for user_task in user_task_filtered_by_user_id]
     owner_ids = [
         user_task.owner_id for user_task in user_task_filtered_by_user_id]
+    owner_names = [User.query.filter_by(
+        id=owner_id).first().username for owner_id in owner_ids]
     # return json.dumps([ut.task_id for ut in task_ids])
     tasks = Task.query.filter(Task.id.in_(task_ids))
-    return json.dumps([extend_dict(task.serialize, 'owner_id', owner_id) for task, owner_id in zip(tasks, owner_ids)]),  200
+    return json.dumps([extend_dict(task.serialize, 'shared_by_name', name if user.username != name else None) for task, name in zip(tasks, owner_names)]),  200
 
 
 @user_pages.route('/tasks/<int:task_id>', methods=['DELETE'])
@@ -214,6 +215,16 @@ def share_task_to_user(task_id: int):
     db.session.commit()
 
     return extend_dict(task.serialize, 'to_user', destination_user_id), 201
+
+
+@user_pages.route('/sharing_users', methods=['GET'])
+@cross_origin()
+@jwt_required()
+def get_users_for_sharing():
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).first()
+    users = User.query.filter(User.id != user.id)
+    return json.dumps([user.serialize for user in users]), 200
 
 
 @user_pages.route('/tasks/<int:task_id>/<int:status>', methods=['PATCH'])

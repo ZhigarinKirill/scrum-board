@@ -5,11 +5,12 @@ from routes.user import user_pages
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 
+cors = CORS()
+
 
 def create_app():
     app = Flask(__name__)
 
-    cors = CORS(app)
     # app.config.from_object('config.Config')
     # app.register_blueprint(swagger_ui_blueprint, url_prefix=SWAGGER_URL)
     # from config import MongodbConfig
@@ -21,4 +22,6 @@ def create_app():
     migrate = Migrate(app, db)
     app.register_blueprint(user_pages, url_prefix='/api/users')
     jwt = JWTManager(app)
+
+    cors.init_app(app)
     return app
