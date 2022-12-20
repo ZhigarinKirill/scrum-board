@@ -1,0 +1,216 @@
+body {
+  font-family: Arial;
+  color: #555;
+}
+
+.form {
+  background-color: #f8f8f8;
+
+  border-top: 1px solid rgb(204, 204, 204);
+  padding: 20px;
+}
+
+.form input[type="text"] {
+  padding: 10px;
+  height: 50px;
+  border: 1px solid rgb(127, 121, 121);
+  border-radius: 5px;
+  font-size: 16px;
+  margin-right: 10px;
+
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+textarea {
+  padding: 10px;
+  resize: none;
+  border: 1px solid rgb(127, 121, 121);
+  border-radius: 5px;
+  width: 400px;
+  height: 100px;
+}
+
+#add-button {
+  display: inline-block;
+  padding: 10px;
+  height: 50px;
+  width: 90px;
+  text-align: center;
+  border: 1px solid rgb(127, 121, 121);
+  border-radius: 5px;
+  color: rgb(127, 121, 121);
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+#add-button:hover {
+  cursor: pointer;
+  background-color: rgb(212, 212, 212);
+}
+
+.button {
+  display: inline-block;
+  padding: 10px;
+  background: linear-gradient(#79a6e2 2%, #3366aa 5%, #1e4e8e);
+  border: none;
+  /* border-radius: 5px; */
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0px 3px 0px #113c75, 0px 5px 5px #333;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.button-backlog {
+  background: transparent;
+  box-shadow: none;
+  color: #3366aa;
+  font-weight: normal;
+}
+
+.button-progress {
+  background: transparent;
+  box-shadow: none;
+  color: #c06300;
+  font-weight: normal;
+}
+
+.button-done {
+  background: transparent;
+  box-shadow: none;
+  color: #007b03;
+  font-weight: normal;
+}
+
+.button-delete {
+  background: transparent;
+  box-shadow: none;
+  color: #be0000;
+  font-weight: normal;
+}
+
+.form > h2 {
+  margin-top: 0;
+}
+
+/* .col-3rds {
+  box-sizing: border-box;
+  width: 33.333%;
+  float: left;
+} */
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+.scrum-board {
+  flex: 1;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.scrum-board:first-child {
+  flex: 1;
+  padding: 20px;
+  border-left: 1px solid #ddd;
+}
+
+.input-group {
+  position: relative;
+  display: block;
+  padding: 10px;
+  border: 1px solid #dddddd;
+  border-left: 5px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #f1f1f1;
+}
+
+.input-group span.taskTitle {
+  color: #333;
+  font-weight: bold;
+}
+
+.inline {
+  display: inline;
+}
+
+.float-right {
+  float: right;
+}
+
+.overflow {
+  overflow: auto;
+}
+
+.button-container {
+  margin-top: 10px;
+  /* text-align: center; */
+}
+
+.placeholder {
+  display: block;
+  background-color: #fff;
+  border: 5px dashed #ededed;
+  min-height: 100px;
+  margin-bottom: 10px;
+}
+
+.backlog .input-group.overflow {
+  background-color: #f1f1f1;
+}
+
+.in-progress .input-group.overflow {
+  background-color: #ffdfbc;
+}
+
+.done .input-group.overflow {
+  background-color: #cfffd0;
+}
+
+.backlog .input-group.overflow div.card {
+  background-color: #f1f1f1;
+}
+
+.in-progress .input-group.overflow div.card {
+  background-color: #ffdfbc;
+}
+
+.done .input-group.overflow div.card {
+  background-color: #cfffd0;
+}
+
+.button-share {
+  float: right;
+  padding: 5px 10px;
+  border: 1px solid rgb(127, 121, 121);
+  border-radius: 5px;
+}
+
+.button-share:hover {
+  cursor: pointer;
+  background-color: rgb(212, 212, 212);
+}
+
+#sharingUsers ul li {
+  padding-left: 30px;
+}
+
+#sharingUsers ul li input {
+  margin-top: 7px;
+}
+
+#sharingUsers ul {
+  border: 0px;
+}
